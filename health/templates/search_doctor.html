@@ -28,7 +28,7 @@
 				</form>
 			</div>
 			</div>
-	{% ifequal t "Name" %}
+	{% if t == "Name" %}
 				<div class="container-fluid" style="width:90%;margin-top:0%">
                     <div class="container-fluid">
                         <h1 align="center" style="font-weight:bold;font-family : 'Monotype Corsiva' ; color : #E6120E ;margin-top:4%">View Doctor Detail</h1>
@@ -42,7 +42,7 @@
                                       <th>Contact</th>
                                       <th>Address</th>
                                       <th>Category</th>
-									</tr>
+										</tr>
                               </thead>
                               <tbody>
                               {% for i in doc %}
@@ -61,8 +61,8 @@
                       </table>
                   </div>
 	{% else %}
-	{% ifequal t "Type" %}
-			<div class="container-fluid" style="width:90%;margin-top:%">
+	{% if t == "Type" %}
+			<div class="container-fluid" style="width:90%;margin-top:0%">
                     <div class="container-fluid">
                         <h1 align="center" style="font-weight:bold;font-family : 'Monotype Corsiva' ; color : #E6120E ;margin-top:4%">View Doctor Detail</h1>
                          </div><hr>
@@ -75,7 +75,7 @@
                                       <th>Contact</th>
                                       <th>Address</th>
                                       <th>Category</th>
-									</tr>
+										</tr>
                               </thead>
                               <tbody>
                               {% for i in doc %}
@@ -92,8 +92,8 @@
                       </table>
                   </div></div>
 	{% else %}
-	{% ifequal t "Address" %}
-			<div class="container-fluid" style="width:90%;margin-top:%">
+	{% if t == "Address" %}
+			<div class="container-fluid" style="width:90%;margin-top:0%">
                     <div class="container-fluid">
                         <h1 align="center" style="font-weight:bold;font-family : 'Monotype Corsiva' ; color : #E6120E ;margin-top:4%">View Doctor Detail</h1>
                          </div><hr>
@@ -106,7 +106,7 @@
                                       <th>Contact</th>
                                       <th>Address</th>
                                       <th>Category</th>
-									</tr>
+										</tr>
                               </thead>
                               <tbody>
                               {% for i in doc %}
@@ -122,7 +122,7 @@
                           </tbody>
                       </table>
                   </div>
-	{% endifequal %}
-	{% endifequal %}
-	{% endifequal %}
+	{% endif %}
+	{% endif %}
+	{% endif %}
 {% endblock %}

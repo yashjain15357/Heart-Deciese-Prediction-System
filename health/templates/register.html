@@ -1,15 +1,13 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block body %}
-	<!-- register -->
-{% ifequal error "create" %}
+{% if error == "create" %}
 <script>
     alert('Registration Successfull');
     window.location="{% url 'login' %}";
 </script>
-{% endifequal %}
-
-
+{% endif %}
+	<!-- register -->
 	<section class="logins py-5">
 		<div class="container py-xl-5 py-lg-3">
 			<div class="title-section mb-md-5 mb-4">

@@ -1,9 +1,19 @@
+import datetime
+import importlib.util
+import pickle
+from functools import lru_cache
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-import datetime
 
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+if importlib.util.find_spec('xgboost') is not None:
+    from xgboost import XGBClassifier
+else:
+    XGBClassifier = None
 
 from .forms import DoctorForm
 from .models import *
@@ -22,6 +32,12 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
 from django.http import HttpResponse
+from pathlib import Path
+
+MODEL_DIR = Path(__file__).resolve().parent.parent / 'Machine_Learning'
+MODEL_PATH = MODEL_DIR / 'heart_prediction_model.pkl'
+FEATURE_COLUMNS = ['age','sex','cp','trestbps','chol','fbs','restecg','thalach','exang','oldpeak','slope','ca','thal']
+
 # Create your views here.
 
 def Home(request):
@@ -105,7 +121,7 @@ def Login_admin(request):
         u = request.POST['uname']
         p = request.POST['pwd']
         user = authenticate(username=u, password=p)
-        if user.is_staff:
+        if user is not None and user.is_staff:
             login(request, user)
             error="pat"
         else:
@@ -177,20 +193,30 @@ def preprocess_inputs(df, scaler):
     return X, y
 
 
-def prdict_heart_disease(list_data):
-    csv_file = Admin_Helath_CSV.objects.get(id=1)
-    df = pd.read_csv(csv_file.csv_file)
 
-    X = df[['age','sex','cp',  'trestbps',  'chol',  'fbs',  'restecg',  'thalach',  'exang',  'oldpeak',  'slope',  'ca',  'thal']]
-    y = df['target']
-    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=0)
-    nn_model = GradientBoostingClassifier(n_estimators=100,learning_rate=1.0,max_depth=1, random_state=0)
-    nn_model.fit(X_train, y_train)
-    pred = nn_model.predict([list_data])
-    print("Neural Network Accuracy: {:.2f}%".format(nn_model.score(X_test, y_test) * 100))
-    print("Prdicted Value is : ", format(pred))
-    dataframe = str(df.head())
-    return (nn_model.score(X_test, y_test) * 100),(pred)
+
+   
+
+
+@lru_cache(maxsize=1)
+def load_saved_model():
+    if not MODEL_PATH.exists():
+        raise FileNotFoundError(
+            f"Model file not found at {MODEL_PATH}. Run the training script once to generate it."
+        )
+
+    with open(MODEL_PATH, 'rb') as model_file:
+        return pickle.load(model_file)
+
+
+def prdict_heart_disease(list_data):
+    bundle = load_saved_model()
+    model = bundle['model']
+    feature_names = bundle.get('feature_names', FEATURE_COLUMNS)
+    input_df = pd.DataFrame([list_data], columns=feature_names)
+    pred = model.predict(input_df)
+    accuracy = float(bundle.get('accuracy', 0.0))
+    return accuracy, pred
 
 @login_required(login_url="login")
 def add_doctor(request,pid=None):
@@ -210,35 +236,75 @@ def add_doctor(request,pid=None):
     d = {"doctor": doctor}
     return render(request, 'add_doctor.html', d)
 
+def normalize_prediction_input(form_data):
+    field_order = ['age','sex','cp','trestbps','chol','fbs','restecg','thalach','exang','oldpeak','slope','ca','thal']
+    aliases = {'chol': ['chole'], 'oldpeak': ['old_peak', 'oldpeak']}
+    processed = []
+
+    sex_map = {
+        'female': 0,
+        'f': 0,
+        '0': 0,
+        'male': 1,
+        'm': 1,
+        '1': 1,
+    }
+    cp_map = {
+        'typical angina': 0,
+        'typical_angina': 0,
+        '0': 0,
+        'atypical angina': 1,
+        'atypical_angina': 1,
+        '1': 1,
+        'non-anginal pain': 2,
+        'non_anginal pain': 2,
+        'nonanginal pain': 2,
+        '2': 2,
+        'asymptomatic': 3,
+        '3': 3,
+    }
+
+    for key in field_order:
+        value = ''
+        if key in form_data:
+            value = form_data.get(key, '')
+        else:
+            for alias in aliases.get(key, []):
+                if alias in form_data:
+                    value = form_data.get(alias, '')
+                    break
+
+        raw = str(value).strip().lower()
+
+        if key == 'sex':
+            processed.append(sex_map.get(raw, int(float(value))))
+        elif key == 'cp':
+            processed.append(cp_map.get(raw, int(float(value))))
+        elif key == 'oldpeak':
+            processed.append(float(value))
+        else:
+            processed.append(int(float(value)))
+
+    return processed
+
+
 @login_required(login_url="login")
 def add_heartdetail(request):
     if request.method == "POST":
-        # list_data = [57, 0, 1, 130, 236, 0, 0, 174, 0, 0.0, 1, 1, 2]
-        list_data = []
-        value_dict = eval(str(request.POST)[12:-1])
-        count = 0
-        for key,value in value_dict.items():
-            if count == 0:
-                count =1
-                continue
-            if key == "sex" and value[0] == "Male" or value[0] == 'male' or value[0]=='m' or value[0] == 'M':
-                list_data.append(0)
-                continue
-            elif key == "sex":
-                list_data.append(1)
-                continue
-            list_data.append(value[0])
+        try:
+            list_data = normalize_prediction_input(request.POST)
+        except (TypeError, ValueError):
+            messages.error(request, 'Please enter numeric values matching the dataset format.')
+            return redirect('add_heartdetail')
 
-        # list_data = [57, 0, 1, 130, 236, 0, 0, 174, 0, 0.0, 1, 1, 2]
-        accuracy,pred = prdict_heart_disease(list_data)
+        accuracy, pred = prdict_heart_disease(list_data)
         patient = Patient.objects.get(user=request.user)
         Search_Data.objects.create(patient=patient, prediction_accuracy=accuracy, result=pred[0], values_list=list_data)
         rem = int(pred[0])
-        print("Result = ",rem)
         if pred[0] == 0:
-            pred = "<span style='color:green'>You are healthy</span>"
+            pred_text = "<span style='color:green'>You are healthy</span>"
         else:
-            pred = "<span style='color:red'>You are Unhealthy, Need to Checkup.</span>"
+            pred_text = "<span style='color:red'>You are Unhealthy, Need to Checkup.</span>"
         return redirect('predict_desease', str(rem), str(accuracy))
     return render(request, 'add_heartdetail.html')
 

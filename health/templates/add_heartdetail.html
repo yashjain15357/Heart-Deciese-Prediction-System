@@ -18,58 +18,68 @@
 					<div class="form-group row">
 						<div class="col-md-2">
 						<label>Age</label>
-						<input type="text" class="form-control" name="age"  required="">
+						<input type="number" class="form-control" name="age" min="1" max="120" step="1" required>
 						</div>
 					<div class="col-md-2">
 						<label>Sex</label>
-						<input type="text" class="form-control" name="sex"  required="">
+						<select class="form-control" name="sex" required>
+							<option value="">Select</option>
+							<option value="0">Female</option>
+							<option value="1">Male</option>
+						</select>
 						</div>
 					<div class="col-md-2">
-						<label>Chest Pain</label>
-						<input type="text" class="form-control" name="cp"  required="">
+						<label>Chest Pain Type</label>
+						<select class="form-control" name="cp" required>
+							<option value="">Select</option>
+							<option value="0">Typical Angina</option>
+							<option value="1">Atypical Angina</option>
+							<option value="2">Non-anginal Pain</option>
+							<option value="3">Asymptomatic</option>
+						</select>
 						</div>
 					<div class="col-md-2">
 						<label>Resting BP</label>
-						<input type="text" class="form-control" name="trestbps"  required="">
+						<input type="number" class="form-control" name="trestbps" min="50" max="220" step="1" required>
 						</div>
 					<div class="col-md-2">
 						<label>Cholestrol</label>
-						<input type="text" class="form-control" name="chole"  required="">
+						<input type="number" class="form-control" name="chol" min="80" max="600" step="1" required>
 						</div>
 					<div class="col-md-2">
 						<label>Fasting BS</label>
-						<input type="text" class="form-control" name="fbs"  required="">
+						<input type="number" class="form-control" name="fbs" min="0" max="1" step="1" required>
 						</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-md-2">
 						<label>ECG</label>
-						<input type="text" class="form-control" name="restecg"  required="">
+						<input type="number" class="form-control" name="restecg" min="0" max="2" step="1" required>
 						</div>
 					<div class="col-md-2">
 						<label>Max Heart Rate</label>
-						<input type="text" class="form-control" name="thalach"  required="">
+						<input type="number" class="form-control" name="thalach" min="50" max="220" step="1" required>
 						</div>
 					<div class="col-md-2">
 						<label>Exercise Induced</label>
-						<input type="text" class="form-control" name="exang"  required="">
+						<input type="number" class="form-control" name="exang" min="0" max="1" step="1" required>
 						</div>
 					<div class="col-md-2">
 						<label>Oldpeak</label>
-						<input type="text" class="form-control" name="old_peak"  required="">
+						<input type="number" class="form-control" name="oldpeak" min="0" max="10" step="0.1" required>
 						</div>
 					<div class="col-md-2">
 						<label>Slope</label>
-						<input type="text" class="form-control" name="slope"  required="">
+						<input type="number" class="form-control" name="slope" min="0" max="2" step="1" required>
 						</div>
 					<div class="col-md-2">
 						<label>Cardiac Arrest</label>
-						<input type="text" class="form-control" name="ca"  required="">
+						<input type="number" class="form-control" name="ca" min="0" max="4" step="1" required>
 						</div>
 				</div>
 					<div class="col-md-2">
 						<label>Thalssemia</label>
-						<input type="text" class="form-control" name="thal"  required="">
+						<input type="number" class="form-control" name="thal" min="0" max="3" step="1" required>
 						</div>
 
 					<button type="submit" class="btn submit mt-4" style="background-color: #726f6e;">Send Heart data</button>
