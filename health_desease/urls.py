@@ -24,6 +24,7 @@ from .apirep import routerep
 urlpatterns = [
     # path('api/sensoviz/', include(router.urls)),
     path('api/v1/', include(routerep.urls)),
+    path('ping', ping, name='ping'),
     path('admin/', admin.site.urls),
     path('', Home, name="home"),
     path('patient_home', User_Home,name="patient_home"),

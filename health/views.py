@@ -6,6 +6,7 @@ from functools import lru_cache
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -464,3 +465,6 @@ def sent_feedback(request):
         Feedback.objects.create(user=username, messages=message)
         terror = "create"
     return render(request, 'sent_feedback.html',{'terror':terror})
+
+def ping(request):
+    return HttpResponse('pong', content_type='text/plain')
