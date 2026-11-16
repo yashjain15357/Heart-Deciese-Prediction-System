@@ -22,10 +22,6 @@ from django.contrib.auth import authenticate, login, logout
 import numpy as np
 import pandas as pd
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-sns.set_style('darkgrid')
-
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
 from sklearn.model_selection import train_test_split
 
