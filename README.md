@@ -1,4 +1,11 @@
-<img src="https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System/blob/main/SCREEN-SHOTS/Heart-Disease-Prediction-System-banner.png" />
+# Heart Disease Prediction System
+
+Repository: https://github.com/yashjain15357/Heart-Deciese-Prediction-System.git
+Live Demo: https://heart-deciese-prediction-system.onrender.com
+
+This project predicts heart disease risk using a machine learning model and a Django web application.
+
+<img src="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/SCREEN-SHOTS/Heart-Disease-Prediction-System-banner.png" />
 
 ## Abstract 
 <p> 
@@ -98,7 +105,7 @@ the system and what all are the diseases predicted by the system.*
 - Database:
   - ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
 - #### Data-Set for training:
-  - <a href="https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System/blob/main/Machine_Learning/heart.csv">Click here for DATA-SET</a>
+  - <a href="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/Machine_Learning/heart.csv">Click here for DATA-SET</a>
 - #### IDE:
   - ![VS Code](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
   - ![pyCharm](https://img.shields.io/badge/PyCharm-000000.svg?&style=for-the-badge&logo=PyCharm&logoColor=white)
@@ -112,13 +119,13 @@ the system and what all are the diseases predicted by the system.*
 Clone the project
 
 ```bash
-  git clone https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System
+  git clone https://github.com/yashjain15357/Heart-Deciese-Prediction-System.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd Heart-Disease-Prediction-System
+  cd Heart-Deciese-Prediction-System
 ```
 
 Start the server
@@ -146,7 +153,7 @@ def prdict_heart_disease(list_data):
     return (nn_model.score(X_test, y_test) * 100),(pred)
 ```
 
-### For a detailed Report <a href="https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System/blob/main/REPORT/PYTHON%20CAPSTONE%20PROJECT%20REPORT%20(TEAM%202).pdf">Click Here</a>
+### For a detailed Report <a href="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/REPORT/PYTHON%20CAPSTONE%20PROJECT%20REPORT%20(TEAM%202).pdf">Click Here</a>
 
 
 ## Demo Video
@@ -155,25 +162,25 @@ For demo video
 
 ## Output Screen-shots
 When the application is runned then, a Welcome Page pops-up
-<img src="https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System/blob/main/SCREEN-SHOTS/WelcomePage.png" />
+<img src="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/SCREEN-SHOTS/WelcomePage.png" />
 
 Admin Dash-board:
-<img src="https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System/blob/main/SCREEN-SHOTS/AdminDashboard.png" />
+<img src="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/SCREEN-SHOTS/AdminDashboard.png" />
 
 Entering Heart Details to check our Health:
-<img src="https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System/blob/main/SCREEN-SHOTS/AddHeartDetail.png" />
+<img src="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/SCREEN-SHOTS/AddHeartDetail.png" />
 
 Since these details are stored in the Data-base, so we can also retrieve past results:
-<img src="https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System/blob/main/SCREEN-SHOTS/SearchLogs1.png" />
+<img src="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/SCREEN-SHOTS/SearchLogs1.png" />
 
 To view our own details:
-<img src="https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System/blob/main/SCREEN-SHOTS/ViewMyDetaile.png" />
+<img src="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/SCREEN-SHOTS/ViewMyDetaile.png" />
 
 If a user doesn't understand how to use the application then he can:
-<img src="https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System/blob/main/SCREEN-SHOTS/IntroductionViewVideo.png" />
+<img src="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/SCREEN-SHOTS/IntroductionViewVideo.png" />
 
 To view registered Doctor information:
-<img src="https://github.com/Kumar-laxmi/Heart-Disease-Prediction-System/blob/main/SCREEN-SHOTS/DoctorRecords.png" />
+<img src="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/SCREEN-SHOTS/DoctorRecords.png" />
 
-## NOTE: GitHub Pages is not working
+
 
