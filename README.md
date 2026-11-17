@@ -1,7 +1,9 @@
 # Heart Disease Prediction System
 
 Repository: https://github.com/yashjain15357/Heart-Deciese-Prediction-System.git
-Live Demo: https://heart-deciese-prediction-system.onrender.com
+
+## Live Demo: 
+https://heart-deciese-prediction-system.onrender.com
 
 This project predicts heart disease risk using a machine learning model and a Django web application.
 
