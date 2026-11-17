@@ -156,9 +156,6 @@ def prdict_heart_disease(list_data):
 ### For a detailed Report <a href="https://github.com/yashjain15357/Heart-Deciese-Prediction-System/blob/main/REPORT/PYTHON%20CAPSTONE%20PROJECT%20REPORT%20(TEAM%202).pdf">Click Here</a>
 
 
-## Demo Video
-For demo video 
-<a href="https://amritacampuschennai-my.sharepoint.com/:v:/g/personal/ch_en_u4cse20005_ch_students_amrita_edu/ESuaLdQqmNdFjzSBcMiTpaABWPQ2kZWEwCJ53HsY3UdHHg">Click Here</a>
 
 ## Output Screen-shots
 When the application is runned then, a Welcome Page pops-up
